@@ -12,6 +12,8 @@ It is simply a ubuntu base container with some utilities installed on top, curre
 * `lsof`
 * `ssh `
 * `dnsutils`
+* `nmap`
+* `tcpflow`
 
 It is best run with some never exiting command like `tail -f /dev/null`.
 
