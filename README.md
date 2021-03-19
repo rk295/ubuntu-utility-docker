@@ -16,6 +16,7 @@ It is simply a ubuntu base container with some utilities installed on top, curre
 * `tcpflow`
 * `jq`
 * `python-pip`
+* `postgresql-client`
 * `awscli`
 * `helm`
 * `jamal`
