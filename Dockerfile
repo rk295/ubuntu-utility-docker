@@ -18,6 +18,7 @@ RUN apt-get install -y \
         ssh \
         tcpflow \
         vim \
+        postgresql-client \
         && \
         pip install awscli
 
