@@ -5,21 +5,25 @@ This docker is meant to make it easier for me to debug issues inside Kubernetes 
 
 It is simply a ubuntu base container with some utilities installed on top, currently the list is:
 
-* `vim`
+* `apt-transport-https`
+* `awscli` (via pipx)
 * `curl`
-* `htop`
-* `netcat`
-* `lsof`
-* `ssh `
 * `dnsutils`
-* `nmap`
-* `tcpflow`
-* `jq`
-* `python-pip`
-* `postgresql-client`
-* `awscli`
+* `git`
+* `google-cloud-cli`
+* `gpg`
 * `helm`
-* `jamal`
+* `htop`
+* `jq`
+* `lsof`
+* `netcat-traditional`
+* `nmap`
+* `pipx`
+* `postgresql-client`
+* `python3` & `python3-pip`
+* `ssh`
+* `tcpflow`
+* `vim`
 
 It is best run with some never exiting command like `tail -f /dev/null`.
 

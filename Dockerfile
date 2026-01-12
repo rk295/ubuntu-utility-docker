@@ -1,37 +1,47 @@
 FROM ubuntu
 
-MAINTAINER Robin Kearney <robin@kearney.co.uk>
+LABEL maintainer="robin@kearney.co.uk"
 
-ENV helmVersion "3.5.3"
-ENV jamalVersion "1.0.0"
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    apt-transport-https \
+    curl \
+    dnsutils \
+    git \
+    gpg \
+    htop \
+    jq \
+    lsof \
+    netcat-traditional \
+    nmap \
+    pipx \
+    postgresql-client \
+    python3 python3-pip \
+    ssh \
+    tcpflow \
+    vim && \
+    echo 'export PATH="$PATH:/root/.local/bin"' | tee -a /root/.bashrc && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update
-RUN apt-get install -y \
-        curl \
-        dnsutils \
-        htop \
-        jq \
-        lsof \
-        netcat \
-        nmap \
-        python-pip \
-        ssh \
-        tcpflow \
-        vim \
-        postgresql-client \
-        && \
-        pip install awscli
+RUN pipx install awscli && \
+    rm -rf /root/.cache/pipx
 
-RUN curl -LOs https://get.helm.sh/helm-v${helmVersion}-linux-amd64.tar.gz &&\
-    tar xzvf helm-v${helmVersion}-linux-amd64.tar.gz &&\
-    cp linux-amd64/helm /usr/local/bin &&\
-    chmod +x /usr/local/bin/helm &&\
-    rm -rf linux-amd64 *.tar.gz
+RUN curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | tee /etc/apt/sources.list.d/helm-stable-debian.list && \
+    apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y helm && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN curl -LOs https://github.com/quantumew/jamal/releases/download/v${jamalVersion}/jamal-v${jamalVersion}.tar.gz &&\
-    tar xzvf jamal-v${jamalVersion}.tar.gz jamal-v${jamalVersion}/linux/386/jamal --strip-components=3 &&\
-    mv jamal /usr/local/bin &&\
-    chmod +x /usr/local/bin/jamal &&\
-    rm -rf jamal-v${jamalVersion}.tar.gz
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y google-cloud-cli && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get autoremove -y && \
+    rm -rf /tmp/* && \
+    rm -rf /var/tmp/* && \
+    rm -rf /root/.cache/pip
