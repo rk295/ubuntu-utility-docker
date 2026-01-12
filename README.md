@@ -1,6 +1,9 @@
 ubuntu-utility-docker
 =====================
 
+[![Build and Push Docker Image](https://github.com/rk295/ubuntu-utility-docker/workflows/Build%20and%20Push%20Docker%20Image/badge.svg)](https://github.com/rk295/ubuntu-utility-docker/actions)
+[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Frk295%2Fubuntu--utility--docker%3Alatest-blue?logo=docker)](https://github.com/rk295/ubuntu-utility-docker/pkgs/container/ubuntu-utility-docker)
+
 This docker is meant to make it easier for me to debug issues inside Kubernetes clusters. It might have uses in other clustered environments, for example Swarm or AWS ECS.
 
 It is simply a ubuntu base container with some utilities installed on top, currently the list is:
