@@ -4,7 +4,7 @@ ubuntu-utility-docker
 [![Build and Push Docker Image](https://github.com/rk295/ubuntu-utility-docker/workflows/Build%20and%20Push%20Docker%20Image/badge.svg)](https://github.com/rk295/ubuntu-utility-docker/actions)
 [![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Frk295%2Fubuntu--utility--docker%3Alatest-blue?logo=docker)](https://github.com/rk295/ubuntu-utility-docker/pkgs/container/ubuntu-utility-docker)
 
-This docker is meant to make it easier for me to debug issues inside Kubernetes clusters. It might have uses in other clustered environments, for example Swarm or AWS ECS.
+This container is meant to make it easier for me to debug issues inside Kubernetes clusters. It might have uses in other clustered environments, for example Swarm or AWS ECS.
 
 It is simply a ubuntu base container with some utilities installed on top, currently the list is:
 
@@ -34,7 +34,7 @@ It is best run with some never exiting command like `tail -f /dev/null`.
 
 Simply run `docker build .` from inside this directory:
 
-    $ docker build -t rk295/ubuntu-utility-docker .
+    $ docker build -t ghcr.io/rk295/ubuntu-utility-docker .
     Sending build context to Docker daemon 33.79 kB
     Step 1 : FROM ubuntu
      ---> ebcd9d4fca80
@@ -48,12 +48,12 @@ Simply run `docker build .` from inside this directory:
 
 Run with something like this:
 
-    $ docker run rk295/ubuntu-utility-docker tail -f /dev/null
+    $ docker run ghcr.io/rk295/ubuntu-utility-docker tail -f /dev/null
 
 This will block, so it isn't useful from the shell, but is inside clustered environments.
 
 If you want to run it locally substitute the `tail` with a shell:
 
-    $ docker run --rm -it rk295/ubuntu-utility-docker /bin/bash
+    $ docker run --rm -it ghcr.io/rk295/ubuntu-utility-docker /bin/bash
 
 Thats all!
