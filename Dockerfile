@@ -19,7 +19,8 @@ RUN apt-get update -y && \
     python3 python3-pip \
     ssh \
     tcpflow \
-    vim && \
+    vim \
+    yq && \
     echo 'export PATH="$PATH:/root/.local/bin"' | tee -a /root/.bashrc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
